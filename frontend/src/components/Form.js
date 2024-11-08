@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Form = () => {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', statement: '' });
+const FormSection = () => {
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,60 +13,82 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:5000/apply", formData);
-      setSuccess(true);
-    } catch (error) {
-      console.error("Error submitting form", error);
-      alert("There was an error submitting your application.");
+      const response = await axios.post("http://localhost:5000/api/form", formData);
+      if (response.status === 200) {
+        setSuccess(true);
+        setError(false);
+      }
+    } catch (err) {
+      setError(true);
+      setSuccess(false);
     }
   };
 
   return (
-    <div id="apply" className="max-w-3xl mx-auto p-8 bg-white shadow-md rounded-lg mt-16">
-      <h3 className="text-2xl font-semibold text-gray-800 mb-6">Apply to Proviz School of AI</h3>
-      {success && <div className="text-green-500 mb-4">Your application has been submitted successfully!</div>}
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="Full Name"
-          required
-          className="w-full p-3 border border-gray-300 rounded-md"
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          placeholder="Email"
-          required
-          className="w-full p-3 border border-gray-300 rounded-md"
-        />
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Phone"
-          required
-          className="w-full p-3 border border-gray-300 rounded-md"
-        />
-        <textarea
-          name="statement"
-          value={formData.statement}
-          onChange={handleChange}
-          placeholder="Why do you want to study AI?"
-          required
-          className="w-full p-3 border border-gray-300 rounded-md"
-        />
-        <button type="submit" className="w-full py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-all">
-          Submit Application
+    <section id="form" className="py-20 bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-4xl font-semibold">Contact Us</h2>
+        <p className="text-lg text-gray-400 mt-4">
+          Feel free to reach out with any questions or inquiries. We would love to hear from you!
+        </p>
+      </div>
+
+      <form
+        onSubmit={handleSubmit}
+        className="mt-8 max-w-2xl mx-auto space-y-6 p-6 bg-gray-800 rounded-lg shadow-lg"
+      >
+        <div>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="Your Name"
+            required
+            className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white"
+          />
+        </div>
+
+        <div>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            placeholder="Your Email"
+            required
+            className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white"
+          />
+        </div>
+
+        <div>
+          <textarea
+            name="message"
+            value={formData.message}
+            onChange={handleChange}
+            placeholder="Your Message"
+            required
+            rows="4"
+            className="w-full p-3 bg-gray-700 border border-gray-600 rounded-md text-white"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full py-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 focus:outline-none transition-all"
+        >
+          Send Message
         </button>
+
+        {success && (
+          <div className="text-green-500 mt-4">Your message has been sent successfully!</div>
+        )}
+        {error && (
+          <div className="text-red-500 mt-4">There was an error sending your message. Please try again later.</div>
+        )}
       </form>
-    </div>
+    </section>
   );
 };
 
-export default Form;
+export default FormSection;

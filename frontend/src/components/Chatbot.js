@@ -20,26 +20,22 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="fixed bottom-10 right-10 w-80 bg-white p-4 shadow-lg rounded-lg z-50">
-      <h3 className="text-lg font-semibold mb-4 text-center">AI Chatbot</h3>
-      <div className="chat-window max-h-60 overflow-y-auto mb-4 p-2 border-b">
+    <div className="chatbot fixed bottom-10 right-10 bg-black p-4 shadow-lg rounded-lg w-80">
+      <h3 className="text-white text-xl">AI Chatbot</h3>
+      <div className="chat-window max-h-60 overflow-y-auto text-white">
         {messages.map((msg, idx) => (
-          <div key={idx} className={`message ${msg.user ? "text-blue-500" : "text-gray-800"} mb-2`}>
+          <div key={idx} className={`message ${msg.user ? "user" : "bot"} mb-2`}>
             {msg.text}
           </div>
         ))}
       </div>
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Ask me something..."
-        className="w-full p-2 border rounded-md mb-2"
+      <input 
+        value={input} 
+        onChange={(e) => setInput(e.target.value)} 
+        placeholder="Ask me something..." 
+        className="w-full p-2 border border-gray-300 rounded-md"
       />
-      <button
-        onClick={handleSend}
-        className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-all"
-      >
+      <button onClick={handleSend} className="mt-2 py-1 px-3 bg-purple-600 text-white rounded-md">
         Send
       </button>
     </div>

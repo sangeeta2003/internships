@@ -7,13 +7,13 @@ const BlogSection = () => {
   ];
 
   return (
-    <section id="blog" className="py-20 bg-white text-center">
-      <h2 className="text-4xl font-semibold text-gray-800">Our Latest Blogs</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+    <section className="bg-gray-900 py-20 text-center">
+      <h2 className="text-4xl font-semibold text-white">Our Latest Blogs</h2>
+      <div className="max-w-4xl mx-auto mt-10 space-y-8">
         {blogPosts.map((post, index) => (
-          <div key={index} className="blog-card p-6 border border-gray-300 rounded-lg shadow-lg hover:shadow-xl transition-all">
-            <h3 className="text-2xl font-semibold text-gray-800">{post.title}</h3>
-            <p className="text-lg text-gray-600 mt-2">{post.description}</p>
+          <div key={index} className="bg-gray-800 p-6 rounded-lg shadow-md">
+            <h3 className="text-2xl font-semibold text-white">{post.title}</h3>
+            <p className="text-gray-400 mt-4">{post.description}</p>
           </div>
         ))}
       </div>

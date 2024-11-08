@@ -3,15 +3,15 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-6 text-center">
-      <div className="flex justify-center mb-4">
-        <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="mx-4 text-2xl hover:text-blue-500">
-          <i className="fab fa-facebook-f"></i> {/* Facebook icon */}
+      <div className="flex justify-center space-x-6 mb-4">
+        <a href="https://facebook.com" className="text-gray-400 hover:text-white">
+          <i className="fab fa-facebook"></i>
         </a>
-        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="mx-4 text-2xl hover:text-pink-500">
-          <i className="fab fa-instagram"></i> {/* Instagram icon */}
+        <a href="https://instagram.com" className="text-gray-400 hover:text-white">
+          <i className="fab fa-instagram"></i>
         </a>
-        <a href="mailto:info@provizschool.com" className="mx-4 text-2xl hover:text-red-500">
-          <i className="fas fa-envelope"></i> {/* Email icon */}
+        <a href="mailto:contact@provizai.com" className="text-gray-400 hover:text-white">
+          <i className="fas fa-envelope"></i>
         </a>
       </div>
       <p>&copy; 2024 Proviz School of AI. All rights reserved.</p>
